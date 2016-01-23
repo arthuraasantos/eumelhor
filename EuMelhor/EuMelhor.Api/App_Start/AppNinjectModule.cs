@@ -3,13 +3,8 @@ using EuMelhor.Infrastructure.Data.Repositories;
 using EuMelhor.Domain.Interfaces;
 using Ninject.Modules;
 using Ninject.Web.Common;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace EuMelhor.AppService.Ninject
+namespace EuMelhor.Api.AppStart
 {
     public class AppNinjectModule: NinjectModule
     {
@@ -20,7 +15,7 @@ namespace EuMelhor.AppService.Ninject
 
             // Repositórios
             Bind<IUserRepository>().To<UserRepository>();
-
+            Bind<ILogRepository>().To<LogRepository>();
         }
     }
 }

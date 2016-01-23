@@ -1,8 +1,12 @@
-﻿using System;
+﻿using EuMelhor.Api.App_Start;
+using EuMelhor.Api.AppStart;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Http;
+using System.Web.Mvc;
+using System.Web.Optimization;
 using System.Web.Routing;
 
 namespace EuMelhor.Api
@@ -11,6 +15,9 @@ namespace EuMelhor.Api
     {
         protected void Application_Start()
         {
+            AreaRegistration.RegisterAllAreas();
+            FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
+            BundleConfig.RegisterBundles(BundleTable.Bundles);
             GlobalConfiguration.Configure(WebApiConfig.Register);
         }
     }
