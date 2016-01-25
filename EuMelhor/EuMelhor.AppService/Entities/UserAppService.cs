@@ -6,21 +6,22 @@ using System.Text;
 using System.Threading.Tasks;
 using EuMelhor.AppService.DTO;
 using EuMelhor.Domain.Interfaces;
+using EuMelhor.Infrastructure.Data.Repositories;
 
 namespace EuMelhor.AppService.Entities
 {
     public class UserAppService : IUserAppService
     {
-        private IUserRepository UserRepository;
+        private UserRepository _userRepository;
 
-        public UserAppService(IUserRepository userRepository)
+        public UserAppService()
         {
-            UserRepository = userRepository;
+            _userRepository = new UserRepository();
         }
 
         public List<UserDto> GetAll()
         {
-            var items = UserRepository.GetAll();
+            var items = _userRepository.GetAll();
             UserDto user;
             var userDtoList = new List<UserDto>();
 
@@ -41,7 +42,7 @@ namespace EuMelhor.AppService.Entities
 
         public UserDto GetUser(Guid key)
         {
-            var user = UserRepository.GetById(key);
+            var user = _userRepository.GetById(key);
             return new UserDto()
             {
                 FirstName = user.FirstName,

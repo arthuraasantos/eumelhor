@@ -7,14 +7,11 @@ namespace EuMelhor.Infrastructure.Data.Repositories
 {
     public class UserRepository : RepositoryBase<User,Guid>, IUserRepository
     {
-        private readonly MyContext Uow;
-        private readonly ILogRepository LogRepository;
-
-        public UserRepository(MyContext uow, ILogRepository logRepository)
-            :base(uow,logRepository)
+        private MyContext _uow = new MyContext();
+        private LogRepository _logRepository = new LogRepository();
+        public UserRepository()
         {
-            Uow = uow;
-            LogRepository = logRepository;
+
         }
     }
 }

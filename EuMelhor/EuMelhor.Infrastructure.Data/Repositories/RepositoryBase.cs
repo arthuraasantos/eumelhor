@@ -14,51 +14,47 @@ namespace EuMelhor.Infrastructure.Data.Repositories
         where T : EntityBase
         where Key : struct
     {
-        private MyContext Uow;
-        private ILogRepository LogRepository;
-        public RepositoryBase(MyContext uow, ILogRepository log)
+        private MyContext _uow;
+        private LogRepository _logRepository;
+
+        public RepositoryBase()
         {
-            Uow = uow;
-            LogRepository = log;
+            _uow = new MyContext();
+            _logRepository = new LogRepository();
         }
 
         public void Delete(T entity)
         {
             try
             {
-                Uow.Set<T>().Remove(entity);
-                var log = new Log(){
+                _uow.Set<T>().Remove(entity);
+                var log = new Log()
+                {
                     OcurredDate = DateTime.Now,
                     Description = "Key: '" + entity.Id + "'deletada da tabela " + entity.GetType().Name,
                     Type = LogType.Audit,
-                    Message = "Deletado com sucesso" };
-
-                LogRepository.Add(log);
+                    Message = "Deletado com sucesso"
+                };
+                
+                _logRepository.Add(log);
             }
             catch (Exception ex)
             {
                 var log = new Log()
                 {
                     OcurredDate = DateTime.Now,
-                    Description = string.Empty,
+                    Description = "Erro ao criar registro na tabela" + entity.GetType().Name,
                     Type = LogType.Error,
-                    Message = "Erro ao criar registro na tabela"+entity.GetType().Name
+                    Message = ex.Message
                 };
-                LogRepository.Error(log);
+                _logRepository.Error(log);
                 throw;
             }
         }
 
         public IQueryable<T> GetAll()
         {
-            try
-            {
-                return Uow.Set<T>().AsQueryable();
-            }
-            catch (Exception ex)
-            {
-                throw;
-            }
+            return _uow.Set<T>().AsQueryable();
         }
 
         public T GetById(Key key)

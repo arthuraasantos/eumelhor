@@ -8,22 +8,22 @@ namespace EuMelhor.Infrastructure.Data.Repositories
 {
     public class LogRepository : ILogRepository
     {
-        private MyContext Uow;
+        private MyContext _uow;
 
-        public LogRepository(MyContext uow)
+        public LogRepository()
         {
-            Uow = uow;
+            _uow = new MyContext();
         }
         public void Add(Log log)
         {
-            using (DbContextTransaction transaction = Uow.Database.BeginTransaction())
+            using (DbContextTransaction transaction = _uow.Database.BeginTransaction())
             {
                 try
                 {
                     log.OcurredDate = DateTime.Now;
                     log.Message = "Adicionado com sucesso";
-                    Uow.Logs.Add(log);
-                    Uow.SaveChanges();
+                    _uow.Logs.Add(log);
+                    _uow.SaveChanges();
                     transaction.Commit();
                 }
                 catch (Exception)
@@ -34,14 +34,14 @@ namespace EuMelhor.Infrastructure.Data.Repositories
         }
         public void Delete(Log log)
         {
-            using (DbContextTransaction transaction = Uow.Database.BeginTransaction())
+            using (DbContextTransaction transaction = _uow.Database.BeginTransaction())
             {
                 try
                 {
                     log.OcurredDate = DateTime.Now;
                     log.Message = "Deletado com sucesso";
-                    Uow.Logs.Add(log);
-                    Uow.SaveChanges();
+                    _uow.Logs.Add(log);
+                    _uow.SaveChanges();
                     transaction.Commit();
                 }
                 catch (Exception)
@@ -52,14 +52,14 @@ namespace EuMelhor.Infrastructure.Data.Repositories
         }
         public void Error(Log log)
         {
-            using (DbContextTransaction transaction = Uow.Database.BeginTransaction())
+            using (DbContextTransaction transaction = _uow.Database.BeginTransaction())
             {
                 try
                 {
                     log.OcurredDate = DateTime.Now;
                     log.Message = "Erro ao executar operação";
-                    Uow.Logs.Add(log);
-                    Uow.SaveChanges();
+                    _uow.Logs.Add(log);
+                    _uow.SaveChanges();
                     transaction.Commit();
                 }
                 catch (Exception)
@@ -70,14 +70,14 @@ namespace EuMelhor.Infrastructure.Data.Repositories
         }
         public void Update(Log log)
         {
-            using (DbContextTransaction transaction = Uow.Database.BeginTransaction())
+            using (DbContextTransaction transaction = _uow.Database.BeginTransaction())
             {
                 try
                 {
                     log.OcurredDate = DateTime.Now;
                     log.Message = "Atualizado com sucesso";
-                    Uow.Logs.Add(log);
-                    Uow.SaveChanges();
+                    _uow.Logs.Add(log);
+                    _uow.SaveChanges();
                     transaction.Commit();
                 }
                 catch (Exception)

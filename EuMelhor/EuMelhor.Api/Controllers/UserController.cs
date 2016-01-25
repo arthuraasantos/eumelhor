@@ -12,23 +12,37 @@ namespace EuMelhor.Api.Controllers
 {
     public class UserController : ApiController
     {
-        public IUserAppService UserAppService;
+        public UserAppService UserAppService;
 
-        public UserController(IUserAppService userAppService)
+        public UserController()
         {
-            UserAppService = userAppService;
+            UserAppService = new UserAppService();
         }
 
-        // GET: api/User
-        public IEnumerable<UserDto> Get()
-        {
-            return UserAppService.GetAll();
-        }
+        //// GET: api/User
+        //public IEnumerable<UserDto> Get()
+        //{
+        //    return UserAppService.GetAll();
+        //}
 
         // GET: api/User/5
-        public UserDto Get(Guid key)
+        [HttpGet]
+        []
+        public UserDto Get(string key)
         {
-            return UserAppService.GetUser(key);
+            try
+            {
+                Guid userKey;
+                Guid.TryParse(key, out userKey);
+
+                return UserAppService.GetUser(userKey);
+            }
+            catch (Exception)
+            {
+               
+                throw;
+            }
+            
         }
 
         // POST: api/User

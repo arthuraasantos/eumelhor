@@ -1,6 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using Newtonsoft.Json;
+using Newtonsoft.Json.Serialization;
 using System.Web.Http;
 
 namespace EuMelhor.Api
@@ -10,6 +9,16 @@ namespace EuMelhor.Api
         public static void Register(HttpConfiguration config)
         {
             // Web API configuration and services
+            //config.UseCors(CorsOptions.AllowAll);
+            var formatters = GlobalConfiguration.Configuration.Formatters;
+            var jsonFormatter = formatters.JsonFormatter;
+            var settings = jsonFormatter.SerializerSettings;
+
+            jsonFormatter.SerializerSettings.PreserveReferencesHandling = PreserveReferencesHandling.None;
+            config.Formatters.Remove(config.Formatters.XmlFormatter);
+            settings.Formatting = Formatting.Indented;
+            settings.ContractResolver = new CamelCasePropertyNamesContractResolver();
+            config.EnableCors();
 
             //Web API routes
             config.MapHttpAttributeRoutes();
@@ -19,6 +28,8 @@ namespace EuMelhor.Api
                 routeTemplate: "api/{controller}/{id}",
                 defaults: new { id = RouteParameter.Optional }
             );
+
+            
 
 
         }
