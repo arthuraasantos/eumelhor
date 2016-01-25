@@ -5,7 +5,7 @@ using System;
 
 namespace EuMelhor.Infrastructure.Data.Repositories
 {
-    public class UserRepository : RepositoryBase<User,Guid>, IUserRepository
+    public class UserRepository : RepositoryBase<User>, IUserRepository
     {
         private MyContext _uow = new MyContext();
         private LogRepository _logRepository = new LogRepository();

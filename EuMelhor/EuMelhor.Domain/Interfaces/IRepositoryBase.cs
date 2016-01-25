@@ -6,14 +6,12 @@ using System.Threading.Tasks;
 
 namespace EuMelhor.Domain.Interfaces
 {
-    public interface IRepositoryBase<T,Key>
+    public interface IRepositoryBase<T>
         where T : class
-        where Key: struct
-
     {
         IQueryable<T> GetAll();
-        Guid GetId(Key key);
-        T GetById(Key key);
+        Guid GetId(Guid key);
+        T GetById(Guid key);
         void Save(T entity);
         void Delete(T entity);
     }

@@ -10,9 +10,8 @@ using System.Threading.Tasks;
 
 namespace EuMelhor.Infrastructure.Data.Repositories
 {
-    public class RepositoryBase<T, Key> : IRepositoryBase<T, Key>
+    public class RepositoryBase<T> : IRepositoryBase<T>
         where T : EntityBase
-        where Key : struct
     {
         private MyContext _uow;
         private LogRepository _logRepository;
@@ -57,12 +56,12 @@ namespace EuMelhor.Infrastructure.Data.Repositories
             return _uow.Set<T>().AsQueryable();
         }
 
-        public T GetById(Key key)
+        public T GetById(Guid key)
         {
-            throw new NotImplementedException();
+            return _uow.Set<T>().FirstOrDefault(u => u.Id == key);
         }
 
-        public Guid GetId(Key key)
+        public Guid GetId(Guid key)
         {
             throw new NotImplementedException();
         }
@@ -71,5 +70,6 @@ namespace EuMelhor.Infrastructure.Data.Repositories
         {
             throw new NotImplementedException();
         }
+
     }
 }

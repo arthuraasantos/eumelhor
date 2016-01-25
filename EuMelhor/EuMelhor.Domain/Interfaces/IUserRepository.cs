@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace EuMelhor.Domain.Interfaces
 {
-    public interface IUserRepository: IRepositoryBase<User,Guid>
+    public interface IUserRepository: IRepositoryBase<User>
     {
     }
 }
