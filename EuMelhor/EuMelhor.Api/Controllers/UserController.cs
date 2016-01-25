@@ -27,7 +27,6 @@ namespace EuMelhor.Api.Controllers
 
         // GET: api/User/5
         [HttpGet]
-        []
         public UserDto Get(string key)
         {
             try
