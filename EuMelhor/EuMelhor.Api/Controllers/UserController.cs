@@ -7,6 +7,7 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
+using System.Web.Http.Description;
 
 namespace EuMelhor.Api.Controllers
 {
@@ -27,26 +28,40 @@ namespace EuMelhor.Api.Controllers
 
         // GET: api/User/5
         [HttpGet]
-        public UserDto Get(string key)
+        [ResponseType(typeof(UserDto))]
+        public HttpResponseMessage Get(string key)
         {
             try
             {
                 Guid userKey;
                 Guid.TryParse(key, out userKey);
-
-                return UserAppService.GetUser(userKey);
+                var user = UserAppService.GetUser(userKey);
+                return Request.CreateResponse(HttpStatusCode.OK, user);
             }
             catch (Exception)
             {
-               
-                throw;
+                Request.CreateResponse(HttpStatusCode.InternalServerError, "Ocorreu um erro ao buscar usuário");
             }
-            
+            return Request.CreateResponse(HttpStatusCode.InternalServerError, "Erro inesperado");
+
         }
 
+        [HttpPost]
+        [ResponseType(typeof(string))]
         // POST: api/User
-        public void Post([FromBody]string value)
+        public HttpResponseMessage Post([FromBody]UserDto newUser)
         {
+            try
+            {
+                var result = UserAppService.CreateUser(newUser);
+                return Request.CreateResponse(HttpStatusCode.Created, "Usuário criado com sucesso!");
+            }
+            catch (Exception)
+            {
+                Request.CreateResponse(HttpStatusCode.InternalServerError, "Ocorreu um erro ao criar novo usuário");
+            }
+
+            return Request.CreateResponse(HttpStatusCode.InternalServerError, "Erro inesperado");
         }
 
         // PUT: api/User/5

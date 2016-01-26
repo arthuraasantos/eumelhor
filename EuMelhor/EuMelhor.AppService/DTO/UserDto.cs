@@ -13,5 +13,8 @@ namespace EuMelhor.AppService.DTO
         public string LastName { get; set; }
         public string UserName { get; set; }
         public string Link { get; set; }
+        public string Gender { get; set; }
+        public string Locale { get; set; }
+
     }
 }

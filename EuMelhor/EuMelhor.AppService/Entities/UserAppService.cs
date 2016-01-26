@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using EuMelhor.AppService.DTO;
 using EuMelhor.Domain.Interfaces;
 using EuMelhor.Infrastructure.Data.Repositories;
+using EuMelhor.Domain.Entities;
 
 namespace EuMelhor.AppService.Entities
 {
@@ -17,6 +18,31 @@ namespace EuMelhor.AppService.Entities
         public UserAppService()
         {
             _userRepository = new UserRepository();
+        }
+
+        public bool CreateUser(UserDto newUser)
+        {
+            try
+            {
+                User user = new User()
+                {
+                    FirstName = newUser.FirstName,
+                    Lastname = newUser.LastName,
+                    Gender = newUser.Gender,
+                    Name = newUser.Name,
+                    Locale = newUser.Locale,
+                    Link = newUser.Link
+                };
+
+                _userRepository.Save(user);
+                return true;
+                
+            }
+            catch (Exception ex)
+            {
+                return false;
+            }
+            
         }
 
         public List<UserDto> GetAll()
@@ -33,6 +59,7 @@ namespace EuMelhor.AppService.Entities
                 user.Name = item.Name;
                 user.Link = item.Link;
                 user.UserName = item.UserName;
+                user.Gender = item.Gender;
 
                 userDtoList.Add(user);
             }

@@ -11,5 +11,6 @@ namespace EuMelhor.AppService.Interfaces
     {
         UserDto GetUser(Guid key);
         List<UserDto> GetAll();
+        bool CreateUser(UserDto user);
     }
 }

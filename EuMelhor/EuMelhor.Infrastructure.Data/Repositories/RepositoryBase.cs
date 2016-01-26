@@ -34,6 +34,7 @@ namespace EuMelhor.Infrastructure.Data.Repositories
                     Type = LogType.Audit,
                     Message = "Deletado com sucesso"
                 };
+                _uow.SaveChanges();
                 
                 _logRepository.Add(log);
             }
@@ -59,6 +60,7 @@ namespace EuMelhor.Infrastructure.Data.Repositories
         public T GetById(Guid key)
         {
             return _uow.Set<T>().FirstOrDefault(u => u.Id == key);
+
         }
 
         public Guid GetId(Guid key)
@@ -68,7 +70,10 @@ namespace EuMelhor.Infrastructure.Data.Repositories
 
         public void Save(T entity)
         {
-            throw new NotImplementedException();
+            entity.Id = Guid.NewGuid();
+            entity.CreateDate = DateTime.Now; 
+            _uow.Set<T>().Add(entity);
+            _uow.SaveChanges();
         }
 
     }
