@@ -1,9 +1,8 @@
-﻿using EuMelhor.AppService.DTO;
+﻿using EuMelhor.Api.Models;
+using EuMelhor.AppService.DTO;
 using EuMelhor.AppService.Entities;
 using EuMelhor.AppService.Interfaces;
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
@@ -42,9 +41,8 @@ namespace EuMelhor.Api.Controllers
             }
             catch (Exception)
             {
-                Request.CreateResponse(HttpStatusCode.InternalServerError, "Ocorreu um erro ao buscar usuário");
+              return  Request.CreateResponse(HttpStatusCode.InternalServerError, "Ocorreu um erro ao buscar usuário");
             }
-            return Request.CreateResponse(HttpStatusCode.InternalServerError, "Erro inesperado");
 
         }
 
@@ -74,6 +72,21 @@ namespace EuMelhor.Api.Controllers
         // DELETE: api/User/5
         public void Delete(int id)
         {
+           
+        }
+
+
+        [HttpPost]
+        public HttpResponseMessage Cadastro(UserServiceModelCadastro model)
+        {
+            try
+            {
+                return Request.CreateResponse(HttpStatusCode.OK, "Dados gravados com sucesso.");
+            }
+            catch (Exception ex)
+            {
+                return Request.CreateResponse(HttpStatusCode.Forbidden, ex.Message);
+            }
         }
     }
 }
