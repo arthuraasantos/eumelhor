@@ -75,18 +75,6 @@ namespace EuMelhor.Api.Controllers
            
         }
 
-
-        [HttpPost]
-        public HttpResponseMessage Cadastro(UserServiceModelCadastro model)
-        {
-            try
-            {
-                return Request.CreateResponse(HttpStatusCode.OK, "Dados gravados com sucesso.");
-            }
-            catch (Exception ex)
-            {
-                return Request.CreateResponse(HttpStatusCode.Forbidden, ex.Message);
-            }
-        }
+     
     }
 }
