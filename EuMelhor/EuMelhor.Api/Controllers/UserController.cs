@@ -1,5 +1,4 @@
-﻿using EuMelhor.Api.Models;
-using EuMelhor.AppService.DTO;
+﻿using EuMelhor.AppService.DTO;
 using EuMelhor.AppService.Entities;
 using EuMelhor.AppService.Interfaces;
 using System;
@@ -58,23 +57,37 @@ namespace EuMelhor.Api.Controllers
             }
             catch (Exception)
             {
-                Request.CreateResponse(HttpStatusCode.InternalServerError, "Ocorreu um erro ao criar novo usuário");
+              return  Request.CreateResponse(HttpStatusCode.InternalServerError, "Ocorreu um erro ao criar novo usuário");
             }
 
-            return Request.CreateResponse(HttpStatusCode.InternalServerError, "Erro inesperado");
         }
 
         // PUT: api/User/5
         public void Put(int id, [FromBody]string value)
         {
+           
         }
 
         // DELETE: api/User/5
         public void Delete(int id)
         {
-           
+                  
         }
 
-     
+        [HttpGet]
+        [ResponseType(typeof(UserDto))]
+     public HttpResponseMessage List<UserDto>()
+        {
+            try
+            {
+                var userList = UserAppService.GetAll();
+                return Request.CreateResponse(HttpStatusCode.OK, userList);
+            }
+            catch (Exception)
+            {
+                return Request.CreateResponse(HttpStatusCode.InternalServerError, "Ocorreu um erro ao buscar a listagem de Usuários");
+            }
+              
+        }
     }
 }
