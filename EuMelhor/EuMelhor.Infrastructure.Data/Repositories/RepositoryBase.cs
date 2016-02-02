@@ -70,10 +70,33 @@ namespace EuMelhor.Infrastructure.Data.Repositories
 
         public void Save(T entity)
         {
-            entity.Id = Guid.NewGuid();
-            entity.CreateDate = DateTime.Now; 
-            _uow.Set<T>().Add(entity);
-            _uow.SaveChanges();
+            try
+            {
+                entity.Id = Guid.NewGuid();
+                entity.CreateDate = DateTime.Now; 
+                _uow.Set<T>().Add(entity);
+                _uow.SaveChanges();
+
+                var log = new Log()
+                {
+                    OcurredDate = DateTime.Now,
+                    Description = "Key: '" + entity.Id + "'atualizada na tabela " + entity.GetType().Name,
+                    Type = LogType.Audit,
+                    Message = "Atualizado com sucesso"
+                };
+                _logRepository.Add(log);
+            }
+            catch (Exception ex)
+            {
+                var log = new Log()
+                {
+                    OcurredDate = DateTime.Now,
+                    Description = "Erro ao atualizar registro na tabela" + entity.GetType().Name,
+                    Type = LogType.Error,
+                    Message = ex.Message
+                };
+                _logRepository.Error(log);
+            }
         }
 
     }

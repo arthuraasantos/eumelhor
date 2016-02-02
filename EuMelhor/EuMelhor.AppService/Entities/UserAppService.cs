@@ -38,11 +38,16 @@ namespace EuMelhor.AppService.Entities
                 return true;
                 
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 return false;
             }
             
+        }
+
+        public void Delete(UserDto entity)
+        {
+            throw new NotImplementedException();
         }
 
         public List<UserDto> GetAll()
@@ -78,6 +83,32 @@ namespace EuMelhor.AppService.Entities
                 Link = user.Link,
                 UserName = user.UserName
             };
+        }
+
+        public bool Update(UserDto entity)
+        {
+            try
+            {
+                User user = new User()
+                {
+                    FirstName = entity.FirstName,
+                    Lastname = entity.LastName,
+                    Name = entity.Name,
+                    Link = entity.Link,
+                    UserName = entity.UserName
+                };
+                _userRepository.Save(user);
+                return true;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+        }
+
+        bool IUserAppService.Delete(UserDto entity)
+        {
+            throw new NotImplementedException();
         }
     }
 }
