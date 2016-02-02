@@ -1,0 +1,72 @@
+﻿<!DOCTYPE html>
+<html ng-app="app">
+<head>
+    <title></title>
+    <meta charset="utf-8" />
+    <base href="/">
+
+    <!-- Bootstrap -->
+    <link href="Content/bootstrap.css" rel="stylesheet" />
+    <!-- Style -->
+    <link href="Content/style.css" rel="stylesheet" />
+    <!-- Toastr -->
+    <link href="Content/toastr.css" rel="stylesheet" />
+
+</head>
+<body style="background-color:#337ab7">
+    <div class="container">
+        <br />
+        <div>
+            <nav>
+                <ul class="nav nav-pills pull-right">
+                    <li ng-class="{active: activetab == '/Home'}"><a class="bg-primary" href="/Home">Home</a></li>
+                    <li>&nbsp;&nbsp;</li>
+                    <li role="presentation" class="dropdown">
+                        <a class="dropdown-toggle bg-primary" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
+                            Avaliações <span class="caret"></span>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li ng-class="{active: activetab == '/MyAvaliation'}"><a href="/MyAvaliation">Minhas Avaliações <span class="badge">12</span></a></li>
+                            <li ng-class="{active: activetab == '/SendAvaliation'}"><a href="/SendAvaliation">Avaliar</a></li>
+                            <li role="separator" class="divider"></li>
+                            <li ng-class="{active: activetab == '/Home'}"><a href="/Home">Sair</a></li>
+                        </ul>
+                    </li>
+                    <li ng-class="{active: activetab == '/About'}"><a class="bg-primary" href="/About">About</a></li>
+                    <li ng-class="{active: activetab == '/Contact'}"><a class="bg-primary" href="/Contact">Contact</a></li>
+                    <li ng-class="{active: activetab == '/Login'}"><a class="bg-primary" href="/Login">Login</a></li>
+                </ul>
+            </nav>
+            <h3 class="bg-primary">[ Meu Projeto ]</h3>
+        </div>
+    </div>
+    <br />
+
+    <div class="container-fluid" style="background-color:#ffffff" ng-view></div>
+
+    <br />
+    <footer class="bg-primary">
+        <p class="text-center">&copy; 2016 Design by Emerson Araujo, Inc.</p>
+    </footer>
+
+
+    <!-- JQuery -->
+    <script src="Scripts/jquery-2.2.0.js"></script>
+
+    <!-- Angular -->
+    <script src="Scripts/angular.js"></script>
+    <script src="Scripts/angular-route.js"></script>
+    <script src="App/modules/app.js"></script>
+    <script src="App/configs/routes/routeConfig.js"></script>
+    <script src="App/services/user/userService.js"></script>
+    <script src="App/controllers/routes/routeController.js"></script>
+    <script src="App/controllers/users/userController.js"></script>
+
+    <!-- Bootstrap -->
+    <script src="Scripts/bootstrap.js"></script>
+
+    <!-- Toastr -->
+    <script src="Scripts/toastr.js"></script>
+
+</body>
+</html>
