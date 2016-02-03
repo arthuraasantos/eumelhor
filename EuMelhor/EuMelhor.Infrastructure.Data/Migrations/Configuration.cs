@@ -10,6 +10,7 @@ namespace EuMelhor.Infrastructure.Data.Migrations
         public Configuration()
         {
             AutomaticMigrationsEnabled = true;
+           
         }
 
         protected override void Seed(EuMelhor.Infrastructure.Data.Context.MyContext context)
@@ -35,7 +36,7 @@ namespace EuMelhor.Infrastructure.Data.Migrations
                 Id = Guid.NewGuid(),
                 Name = "Nome Facebook",
                 FirstName = "PrimeiroNomeFacebook",
-                Lastname = "UltimoNomeFacebook",
+                LastName = "UltimoNomeFacebook",
                 Gender = "GeneroFacebook",
                 Link = "LinkPerfilFacebook",
                 Locale = "LocalizacaoFacebook",
@@ -44,6 +45,23 @@ namespace EuMelhor.Infrastructure.Data.Migrations
             };
 
             context.Users.Add(user);
+            #endregion
+
+            #region Criação de Avaliações
+            var evaluation = new Evaluation()
+            {
+                Id = Guid.NewGuid(),
+                Active = true,
+                CreateDate = DateTime.Now,
+                DeleteDate = null,
+                Description = "Primeria avaliação profissional",
+                Type = EvaluationType.Professional,
+                ValuedUser = user,
+                ValuerUser = user,
+                UpdateDate = null
+            };
+
+            context.Evaluations.AddOrUpdate(evaluation);
             #endregion
 
             //  This method will be called after migrating to the latest version.

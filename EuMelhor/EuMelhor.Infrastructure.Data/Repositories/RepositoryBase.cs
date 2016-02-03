@@ -13,8 +13,8 @@ namespace EuMelhor.Infrastructure.Data.Repositories
     public class RepositoryBase<T> : IRepositoryBase<T>
         where T : EntityBase
     {
-        private MyContext _uow;
-        private LogRepository _logRepository;
+        protected MyContext _uow;
+        protected LogRepository _logRepository;
 
         public RepositoryBase()
         {

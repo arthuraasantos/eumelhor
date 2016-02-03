@@ -10,7 +10,7 @@ namespace EuMelhor.Domain.Entities
     {
         public string FirstName { get; set; }
         public string Gender { get; set; }
-        public string Lastname { get; set; }
+        public string LastName { get; set; }
         public string Link { get; set; }
         public string Locale { get; set; }
         public string Name { get; set; }

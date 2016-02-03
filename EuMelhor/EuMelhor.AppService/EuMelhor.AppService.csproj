@@ -48,8 +48,15 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Convert\EvaluationConvert.cs" />
+    <Compile Include="Convert\UserConvert.cs" />
+    <Compile Include="Interfaces\IConvertBase.cs" />
+    <Compile Include="DTO\EntityBaseDto.cs" />
+    <Compile Include="DTO\EvaluationDto.cs" />
     <Compile Include="DTO\UserDto.cs" />
+    <Compile Include="Entities\EvaluationAppService.cs" />
     <Compile Include="Entities\UserAppService.cs" />
+    <Compile Include="Interfaces\IEvaluationAppService.cs" />
     <Compile Include="Interfaces\IUserAppService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -64,6 +71,10 @@
     <ProjectReference Include="..\EuMelhor.Infrastructure.Data\EuMelhor.Infrastructure.Data.csproj">
       <Project>{3c261bd0-0eeb-4537-9669-2fd6c6559eea}</Project>
       <Name>EuMelhor.Infrastructure.Data</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\EuMelhor.Infrastructure.Utils\EuMelhor.Infrastructure.Utils.csproj">
+      <Project>{52fe52b3-dd25-4705-ae1d-a74180c97844}</Project>
+      <Name>EuMelhor.Infrastructure.Utils</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup />

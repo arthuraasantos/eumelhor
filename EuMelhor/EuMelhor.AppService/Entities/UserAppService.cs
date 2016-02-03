@@ -1,11 +1,7 @@
 ﻿using EuMelhor.AppService.Interfaces;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using EuMelhor.AppService.DTO;
-using EuMelhor.Domain.Interfaces;
 using EuMelhor.Infrastructure.Data.Repositories;
 using EuMelhor.Domain.Entities;
 
@@ -27,7 +23,7 @@ namespace EuMelhor.AppService.Entities
                 User user = new User()
                 {
                     FirstName = newUser.FirstName,
-                    Lastname = newUser.LastName,
+                    LastName = newUser.LastName,
                     Gender = newUser.Gender,
                     Name = newUser.Name,
                     Locale = newUser.Locale,
@@ -60,7 +56,7 @@ namespace EuMelhor.AppService.Entities
             {
                 user = new UserDto();
                 user.FirstName = item.FirstName;
-                user.LastName = item.Lastname;
+                user.LastName = item.LastName;
                 user.Name = item.Name;
                 user.Link = item.Link;
                 user.UserName = item.UserName;
@@ -78,7 +74,7 @@ namespace EuMelhor.AppService.Entities
             return new UserDto()
             {
                 FirstName = user.FirstName,
-                LastName = user.Lastname,
+                LastName = user.LastName,
                 Name = user.Name,
                 Link = user.Link,
                 UserName = user.UserName
@@ -92,7 +88,7 @@ namespace EuMelhor.AppService.Entities
                 User user = new User()
                 {
                     FirstName = entity.FirstName,
-                    Lastname = entity.LastName,
+                    LastName = entity.LastName,
                     Name = entity.Name,
                     Link = entity.Link,
                     UserName = entity.UserName

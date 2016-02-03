@@ -7,6 +7,13 @@ namespace EuMelhor.Infrastructure.Utils.Const
         Audit,
         Error
     }
+
+    public enum EvaluationType
+    {
+        Personal,
+        Professional,
+        Friend
+    }
 }
 
 

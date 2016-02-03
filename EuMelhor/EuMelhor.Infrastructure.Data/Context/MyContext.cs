@@ -24,6 +24,7 @@ namespace EuMelhor.Infrastructure.Data.Context
         {
             modelBuilder.Configurations.Add(new UserMapping());
             modelBuilder.Configurations.Add(new LogMapping());
+            modelBuilder.Configurations.Add(new EvaluationMapping());
 
             modelBuilder.Conventions.Remove<PluralizingTableNameConvention>();
             base.OnModelCreating(modelBuilder);
@@ -31,5 +32,6 @@ namespace EuMelhor.Infrastructure.Data.Context
 
         public DbSet<User> Users { get; set; }
         public DbSet<Log> Logs { get; set; }
+        public DbSet<Evaluation> Evaluations { get; set; }
     }
 }

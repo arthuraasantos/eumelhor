@@ -41,8 +41,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Entities\EntityBase.cs" />
+    <Compile Include="Entities\Evaluation.cs" />
     <Compile Include="Entities\Log.cs" />
     <Compile Include="Entities\User.cs" />
+    <Compile Include="Interfaces\IEvaluationRepository.cs" />
     <Compile Include="Interfaces\ILogRepository.cs" />
     <Compile Include="Interfaces\IRepositoryBase.cs" />
     <Compile Include="Interfaces\IUserRepository.cs" />

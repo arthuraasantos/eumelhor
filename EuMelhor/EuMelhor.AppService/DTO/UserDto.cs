@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace EuMelhor.AppService.DTO
 {
-    public class UserDto
+    public class UserDto : EntityBaseDto
     {
         public string Name { get; set; }
         public string FirstName { get; set; }
