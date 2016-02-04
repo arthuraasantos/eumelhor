@@ -63,15 +63,37 @@ namespace EuMelhor.Api.Controllers
         }
 
         // PUT: api/User/5
-        public void Put(int id, [FromBody]string value)
+        public HttpResponseMessage Put(int id, [FromBody]string value) 
         {
-           
+            try
+            {
+                return Request.CreateResponse(HttpStatusCode.OK, "Registro atualizado com sucesso");
+            }
+            catch (Exception)
+            {
+                return Request.CreateResponse(HttpStatusCode.GatewayTimeout, "Ocorreu um erro ao Atualizar");
+            }
         }
 
+
+        [HttpDelete]
+        [ResponseType(typeof(string))]
         // DELETE: api/User/5
-        public void Delete(int id)
+        public HttpResponseMessage Delete(string key)
         {
-                  
+            try
+            {
+                return Request.CreateResponse(HttpStatusCode.OK, "Deletado com Sucesso");
+              
+                Guid userKey;
+                Guid.TryParse(key, out userKey);
+                var user = UserAppService.GetUser(userKey);
+                UserAppService.Delete(user);
+            }
+            catch (Exception)
+            {
+                return Request.CreateResponse(HttpStatusCode.GatewayTimeout, "Ocorreu um erro ao Deletar");
+            }
         }
 
         [HttpGet]
