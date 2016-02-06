@@ -1,12 +1,13 @@
 ﻿using EuMelhor.AppService.DTO;
 using EuMelhor.AppService.Entities;
-using EuMelhor.AppService.Interfaces;
 using System;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
 using System.Web.Http.Cors;
 using System.Web.Http.Description;
+using EuMelhor.Api.Models;
+
 
 namespace EuMelhor.Api.Controllers
 {
@@ -20,6 +21,13 @@ namespace EuMelhor.Api.Controllers
             UserAppService = new UserAppService();
         }
 
+        //Metodo para eliminar a possibilidade de retornar XML e identar o JSON
+        public static void Register(HttpConfiguration config)
+        {
+            config.Formatters.Remove(config.Formatters.XmlFormatter);
+            config.Formatters.JsonFormatter.Indent = true;
+
+        }
         //// GET: api/User
         //public IEnumerable<UserDto> Get()
         //{
@@ -40,7 +48,7 @@ namespace EuMelhor.Api.Controllers
             }
             catch (Exception)
             {
-              return  Request.CreateResponse(HttpStatusCode.InternalServerError, "Ocorreu um erro ao buscar usuário");
+                return Request.CreateResponse(HttpStatusCode.InternalServerError, "Ocorreu um erro ao buscar usuário");
             }
 
         }
@@ -57,23 +65,48 @@ namespace EuMelhor.Api.Controllers
             }
             catch (Exception)
             {
-              return  Request.CreateResponse(HttpStatusCode.InternalServerError, "Ocorreu um erro ao criar novo usuário");
+                return Request.CreateResponse(HttpStatusCode.InternalServerError, "Ocorreu um erro ao criar novo usuário");
             }
 
         }
 
-        // PUT: api/User/5
-        public HttpResponseMessage Put(int id, [FromBody]string value) 
+
+        [HttpPut]
+        // PUT: api/User/Put
+        public HttpResponseMessage Put(UserDTOServiceModel model)
         {
             try
             {
-                return Request.CreateResponse(HttpStatusCode.OK, "Registro atualizado com sucesso");
+                UserDto u = new UserDto();
+
+                u.FirstName = model.FirstName;
+                u.Name = model.Name;
+                u.LastName = model.LastName;
+                u.UserName = model.UserName;
+                u.Link = model.Link;
+                u.Gender = model.Gender;
+                u.Locale = model.Locale;
+
+                UserAppService.Update(u);
+                return Request.CreateResponse(HttpStatusCode.OK, "Registro Atualizado com Sucesso!");
             }
             catch (Exception)
             {
-                return Request.CreateResponse(HttpStatusCode.GatewayTimeout, "Ocorreu um erro ao Atualizar");
+                return Request.CreateResponse(HttpStatusCode.GatewayTimeout, "Não foi possivel Atualizar o registro");
             }
         }
+
+        //public HttpResponseMessage Put(int id, [FromBody]string value) 
+        //{
+        //    try
+        //    {
+        //        return Request.CreateResponse(HttpStatusCode.OK, "Registro atualizado com sucesso");
+        //    }
+        //    catch (Exception)
+        //    {
+        //        return Request.CreateResponse(HttpStatusCode.GatewayTimeout, "Ocorreu um erro ao Atualizar");
+        //    }
+        //}
 
 
         [HttpDelete]
@@ -84,7 +117,7 @@ namespace EuMelhor.Api.Controllers
             try
             {
                 return Request.CreateResponse(HttpStatusCode.OK, "Deletado com Sucesso");
-              
+
                 Guid userKey;
                 Guid.TryParse(key, out userKey);
                 var user = UserAppService.GetUser(userKey);
@@ -98,7 +131,7 @@ namespace EuMelhor.Api.Controllers
 
         [HttpGet]
         [ResponseType(typeof(UserDto))]
-     public HttpResponseMessage List<UserDto>()
+        public HttpResponseMessage List<UserDto>()
         {
             try
             {
@@ -109,7 +142,7 @@ namespace EuMelhor.Api.Controllers
             {
                 return Request.CreateResponse(HttpStatusCode.InternalServerError, "Ocorreu um erro ao buscar a listagem de Usuários");
             }
-              
         }
+
     }
 }

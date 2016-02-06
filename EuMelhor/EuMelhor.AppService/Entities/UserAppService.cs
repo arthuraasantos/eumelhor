@@ -7,7 +7,7 @@ using EuMelhor.Domain.Entities;
 
 namespace EuMelhor.AppService.Entities
 {
-    public class UserAppService : IUserAppService
+    public class  UserAppService : IUserAppService
     {
         private UserRepository _userRepository;
 
